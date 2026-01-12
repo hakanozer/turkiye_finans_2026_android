@@ -1,5 +1,7 @@
 package com.works.project.domain.utils
 
+import org.w3c.dom.Document
+
 class Validations {
 
     fun validateEmail(email: String): Boolean {
@@ -12,6 +14,10 @@ class Validations {
         // min 6 karakter regex
         val min6Regex = Regex(".{6,}")
         return min6Regex.matches(password)
+    }
+
+    fun exportDocument(doc: Document) {
+        doc.normalizeDocument();
     }
 
 }
