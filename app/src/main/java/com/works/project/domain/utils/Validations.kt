@@ -1,8 +1,11 @@
 package com.works.project.domain.utils
 
+import dagger.hilt.android.lifecycle.HiltViewModel
 import org.w3c.dom.Document
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class Validations {
+class Validations @Inject constructor() {
 
     fun validateEmail(email: String): Boolean {
         val emailRegex = Regex("^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})")

@@ -7,10 +7,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.works.project.ui.login.LoginActivity
+import dagger.hilt.android.AndroidEntryPoint
 import java.sql.Time
 import java.util.TimerTask
 import java.util.logging.Handler
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

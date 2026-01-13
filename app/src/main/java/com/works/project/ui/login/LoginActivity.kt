@@ -1,21 +1,27 @@
 package com.works.project.ui.login
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.launch
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.works.project.R
 import com.works.project.data.repository.UserRepositoryImpl
 import com.works.project.databinding.ActivityLoginBinding
-import androidx.lifecycle.lifecycleScope // Import lifecycleScope
-import kotlinx.coroutines.launch // Import launch
+import androidx.lifecycle.lifecycleScope
+import com.works.project.domain.utils.Validations
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var validations: Validations
 
     private lateinit var binding: ActivityLoginBinding
 
@@ -30,6 +36,8 @@ class LoginActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        Log.d("nametag", "onCreate:" + validations)
 
         //binding.lBtnLogin.setOnClickListener { v -> btnLogin() }
         binding.lBtnLogin.setOnClickListener(btnLoginClickEvent)
