@@ -1,9 +1,10 @@
 package com.works.project.domain.repository
 
+import com.works.project.data.remote.login.UserLoginRequestDto
 import com.works.project.domain.model.UserData
 
 interface UserRepository {
 
-    suspend fun login(email: String, password: String): UserData?
+    suspend fun login(email: String, password: String):  UserLoginRequestDto?
 
 }

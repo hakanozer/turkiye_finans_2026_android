@@ -1,12 +1,13 @@
 package com.works.project.domain.usecase
 
+import com.works.project.data.remote.login.UserLoginRequestDto
 import com.works.project.domain.model.UserData
 import com.works.project.domain.repository.UserRepository
 import com.works.project.domain.utils.Validations
 
 class UserLoginUseCase(private val userRepository: UserRepository) {
 
-    suspend operator fun invoke(email: String, password: String): UserData? {
+    suspend operator fun invoke(email: String, password: String):  UserLoginRequestDto? {
         // email control
         val valid = Validations()
         if (!valid.validateEmail(email)) {
