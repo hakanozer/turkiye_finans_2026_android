@@ -55,4 +55,34 @@
         android:text="Login"
         app:layout_constraintStart_toStartOf="@+id/l_txtPassword"
         app:layout_constraintTop_toBottomOf="@+id/l_txtPassword" />
+
+    <Button
+        android:id="@+id/l_btnChange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Change"
+        app:layout_constraintEnd_toEndOf="@+id/l_txtPassword"
+        app:layout_constraintTop_toBottomOf="@+id/l_txtPassword" />
+
+    <TextView
+        android:id="@+id/l_txtChange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="10"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/l_btnChange"
+        app:layout_constraintStart_toEndOf="@+id/l_btnLogin"
+        app:layout_constraintTop_toBottomOf="@+id/l_btnChange" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.works.project.ui.login.LoginFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="@+id/l_btnChange"
+        app:layout_constraintStart_toStartOf="@+id/l_btnLogin"
+        app:layout_constraintTop_toBottomOf="@+id/l_txtChange" />
 </androidx.constraintlayout.widget.ConstraintLayout>

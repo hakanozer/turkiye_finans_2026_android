@@ -21,6 +21,7 @@ class AppModule {
     @Singleton
     fun apiRetrofit() : Retrofit {
         val client = OkHttpClient.Builder()
+            .addInterceptor(AuthInterceptor())
             .connectTimeout(60, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
             .build()

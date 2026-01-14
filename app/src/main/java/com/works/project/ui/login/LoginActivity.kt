@@ -1,10 +1,13 @@
 package com.works.project.ui.login
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -17,6 +20,7 @@ import com.works.project.data.remote.login.UserLoginRequestDto
 import com.works.project.domain.model.UserData
 import com.works.project.domain.utils.ApiClient
 import com.works.project.domain.utils.Validations
+import com.works.project.ui.models.UserLoginModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -26,6 +30,12 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
+
+    private val viewModel: UserLoginModel by viewModels()
+
+    lateinit var sharedPreferences: SharedPreferences
+    lateinit var editor: SharedPreferences.Editor
+
 
     @Inject
     lateinit var validations: Validations
@@ -40,6 +50,9 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+        editor = sharedPreferences.edit()
+
         enableEdgeToEdge()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -51,6 +64,14 @@ class LoginActivity : AppCompatActivity() {
 
         //binding.lBtnLogin.setOnClickListener { v -> btnLogin() }
         binding.lBtnLogin.setOnClickListener(btnLoginClickEvent)
+
+        viewModel.userNumber.observe(this) {
+            binding.lTxtChange.text = it.toString()
+        }
+
+        binding.lBtnChange.setOnClickListener {
+            viewModel.actionPlus()
+        }
     }
 
     fun btnLogin() {
@@ -76,6 +97,8 @@ class LoginActivity : AppCompatActivity() {
                             val status = response.code()
                             Log.d("nametag", "onResponse: " + status)
                             if (res != null && status == 200) {
+                                editor.putString("token", res.data.access_token)
+                                editor.apply()
                                 Toast.makeText(this@LoginActivity, res.data.access_token, Toast.LENGTH_SHORT).show()
                             }else {
                                 Toast.makeText(this@LoginActivity, "Username or Password Error", Toast.LENGTH_SHORT).show()
