@@ -17,12 +17,23 @@ import com.works.project.databinding.ActivityLoginBinding
 import androidx.lifecycle.lifecycleScope
 import com.works.project.data.remote.UserApi
 import com.works.project.data.remote.login.UserLoginRequestDto
+import com.works.project.domain.factory.ActionImpl
+import com.works.project.domain.factory.EProduct
+import com.works.project.domain.factory.IAction
+import com.works.project.domain.factory.ProductFactory
 import com.works.project.domain.model.UserData
+import com.works.project.domain.strategy.B
+import com.works.project.domain.strategy.Eft
+import com.works.project.domain.strategy.Havale
+import com.works.project.domain.strategy.IPay
+import com.works.project.domain.strategy.KrediKarti
 import com.works.project.domain.utils.ApiClient
 import com.works.project.domain.utils.Validations
 import com.works.project.ui.models.UserLoginModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,6 +50,10 @@ class LoginActivity : AppCompatActivity() {
 
     @Inject
     lateinit var validations: Validations
+
+    @Inject
+    lateinit var iActionArr: Set<@JvmSuppressWildcards IAction>
+
 
     @Inject
     lateinit var userApi: UserApi
@@ -72,6 +87,38 @@ class LoginActivity : AppCompatActivity() {
         binding.lBtnChange.setOnClickListener {
             viewModel.actionPlus()
         }
+
+        Log.d("TAG", "iAction :" + iActionArr.toList().get(0).call())
+        Log.d("TAG", "iAction :" + iActionArr.toList().get(1).call())
+
+
+        val result = ProductFactory().createProduct(EProduct.ProductA)
+        result.onSuccess {
+            it.addBasket()
+        }
+
+        val havale = Havale()
+        val eft = Eft();
+        val krediKarti = KrediKarti();
+
+        callPay(havale)
+        callPay(eft)
+        callPay(krediKarti)
+
+        val b = B()
+
+        val thread: Thread = Thread(Runnable {
+            val sum = b.sum(10, 20)
+            Log.d("TAG", "Thread: " + sum)
+        })
+        thread.start()
+
+
+
+    }
+
+    fun callPay(pay: IPay) {
+        pay.pay()
     }
 
     fun btnLogin() {
@@ -124,4 +171,17 @@ class LoginActivity : AppCompatActivity() {
 
 
     }
+
+    suspend fun loadAndShowUser() {
+        // 1. UI Thread'de başlar
+        val user = withContext(Dispatchers.IO) {
+            // 2. Arka planda veriyi çeker
+
+        }
+        // 3. Otomatik olarak UI Thread'e döner
+
+    }
+
+
+
 }

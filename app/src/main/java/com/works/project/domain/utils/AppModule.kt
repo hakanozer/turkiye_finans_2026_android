@@ -1,11 +1,15 @@
 package com.works.project.domain.utils
 
 import com.works.project.data.remote.UserApi
+import com.works.project.domain.factory.ActionImpl
+import com.works.project.domain.factory.IAction
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.scopes.ActivityScoped
 import dagger.hilt.components.SingletonComponent
+import dagger.multibindings.IntoSet
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -42,5 +46,19 @@ class AppModule {
     fun userApi( retrofit: Retrofit ) : UserApi {
         return retrofit.create(UserApi::class.java)
     }
+
+    @Provides
+    @IntoSet
+    fun provideAction(): IAction {
+        return ActionImpl()
+    }
+
+    @Provides
+    @IntoSet
+    fun provideAction1(): IAction {
+        return ActionImpl1()
+    }
+
+
 
 }
