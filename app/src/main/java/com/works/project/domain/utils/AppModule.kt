@@ -1,5 +1,6 @@
 package com.works.project.domain.utils
 
+import com.works.project.data.remote.TodoApi
 import com.works.project.data.remote.UserApi
 import com.works.project.domain.factory.ActionImpl
 import com.works.project.domain.factory.IAction
@@ -45,6 +46,12 @@ class AppModule {
     @Singleton
     fun userApi( retrofit: Retrofit ) : UserApi {
         return retrofit.create(UserApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun todoApi( retrofit: Retrofit ) : TodoApi {
+        return retrofit.create(TodoApi::class.java)
     }
 
     @Provides

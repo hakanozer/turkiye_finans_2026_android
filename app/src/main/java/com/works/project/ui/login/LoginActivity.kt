@@ -1,6 +1,7 @@
 package com.works.project.ui.login
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -30,6 +31,7 @@ import com.works.project.domain.strategy.KrediKarti
 import com.works.project.domain.utils.ApiClient
 import com.works.project.domain.utils.Validations
 import com.works.project.ui.models.UserLoginModel
+import com.works.project.ui.todo.TodoActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -146,7 +148,10 @@ class LoginActivity : AppCompatActivity() {
                             if (res != null && status == 200) {
                                 editor.putString("token", res.data.access_token)
                                 editor.apply()
-                                Toast.makeText(this@LoginActivity, res.data.access_token, Toast.LENGTH_SHORT).show()
+                                // Toast.makeText(this@LoginActivity, res.data.access_token, Toast.LENGTH_SHORT).show()
+                                val intent = Intent(this@LoginActivity, TodoActivity::class.java)
+                                startActivity(intent)
+                                finish()
                             }else {
                                 Toast.makeText(this@LoginActivity, "Username or Password Error", Toast.LENGTH_SHORT).show()
                             }
@@ -168,15 +173,12 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this@LoginActivity, err.message, Toast.LENGTH_SHORT).show()
             }
         }
-
-
     }
 
     suspend fun loadAndShowUser() {
         // 1. UI Thread'de başlar
         val user = withContext(Dispatchers.IO) {
             // 2. Arka planda veriyi çeker
-
         }
         // 3. Otomatik olarak UI Thread'e döner
 

@@ -43,7 +43,7 @@ class LoginFragment : Fragment() {
 
     private fun setupClickListeners() {
         binding.lFBtnData.setOnClickListener {
-            viewModel.actionPlus()
+            // viewModel.actionPlus()
         }
 
     }
