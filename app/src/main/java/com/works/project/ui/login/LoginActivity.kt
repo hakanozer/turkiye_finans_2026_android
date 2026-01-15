@@ -85,7 +85,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.lBtnChange.setOnClickListener {
-            viewModel.actionPlus()
+            //viewModel.actionPlus()
         }
 
         Log.d("TAG", "iAction :" + iActionArr.toList().get(0).call())
