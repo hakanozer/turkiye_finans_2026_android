@@ -22,7 +22,7 @@ class ValidationsTest {
 
     @Test
     fun `validateEmail with invalid email returns false`() {
-        assertFalse(validations.validateEmail("test"))
+        assertFalse(validations.validateEmail("test@"))
         assertFalse(validations.validateEmail("test@domain"))
         assertFalse(validations.validateEmail("@domain.com"))
     }
