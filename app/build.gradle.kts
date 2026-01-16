@@ -43,6 +43,7 @@ android {
     }
 }
 
+
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -71,5 +72,10 @@ dependencies {
     ksp("androidx.room:room-compiler:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
 
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.12.0")
 
+    // JUnit 5 API ( @Test, @Tag, @BeforeEach vs. )
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
+    // Test engine (zorunlu)
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.2")
 }

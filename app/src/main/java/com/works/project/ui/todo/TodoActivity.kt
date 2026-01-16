@@ -3,7 +3,6 @@ package com.works.project.ui.todo
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
@@ -12,7 +11,6 @@ import com.works.project.data.remote.TodoApi
 import com.works.project.databinding.ActivityTodoBinding
 import com.works.project.domain.model.TodoData
 import com.works.project.domain.model.TodoEntity
-import com.works.project.domain.utils.ApiClient
 import com.works.project.domain.utils.AppDatabase
 import com.works.project.domain.utils.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint

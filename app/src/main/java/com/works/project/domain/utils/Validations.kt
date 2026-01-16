@@ -19,8 +19,5 @@ class Validations @Inject constructor() {
         return min6Regex.matches(password)
     }
 
-    fun exportDocument(doc: Document) {
-        doc.normalizeDocument();
-    }
 
 }
